@@ -30,7 +30,7 @@ def jacobi(nx, ny, max_iter = 10000, tol = 1e-5):
     u_new[0, :] = 1  # Top boundary
     u_new[-1, :] = 0  # Bottom boundary
     
-
+    errors = []
     # Iteratively update the solution
     for it in range(max_iter):
         # Update each interior point
@@ -42,15 +42,16 @@ def jacobi(nx, ny, max_iter = 10000, tol = 1e-5):
         u_new[0, :] = 1  # Top boundary
         u_new[-1, :] = 0  # Bottom boundary
 
+        errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
-        if np.linalg.norm(u_new - u) < tol:
+        if np.max(np.abs(u_new - u)) < tol:
             print(f'Converged after {it} iterations.')
             break
         
         # Update the solution for the next iteration
         u[:] = u_new[:]
     
-    return u
+    return u, errors
 
 
 def gauss_seidel(nx, ny, max_iter = 10000, tol = 1e-5):
@@ -65,7 +66,7 @@ def gauss_seidel(nx, ny, max_iter = 10000, tol = 1e-5):
     u_new[0, :] = 1  # Top boundary
     u_new[-1, :] = 0  # Bottom boundary
     
-
+    errors = []
     # Iteratively update the solution
     for it in range(max_iter):
         # Update each interior point
@@ -76,15 +77,16 @@ def gauss_seidel(nx, ny, max_iter = 10000, tol = 1e-5):
                 u_new[i, j] = 0.25 * (u[i+1, j] + u_new[i-1, j] + u[i, jr] + u_new[i, jl])
         u_new[0, :] = 1  # Top boundary
         u_new[-1, :] = 0  # Bottom boundary
+        errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
-        if np.linalg.norm(u_new - u) < tol:
+        if np.max(np.abs(u_new - u)) < tol :
             print(f'Converged after {it} iterations.')
             break
         
         # Update the solution for the next iteration
         u[:] = u_new[:]
     
-    return u
+    return u, errors
 
 def successive_over_relaxation(nx, ny, w, max_iter = 10000, tol = 1e-5, omega = 1.5):
     '''Successive Over-Relaxation method for laplace equation'''
@@ -97,7 +99,7 @@ def successive_over_relaxation(nx, ny, w, max_iter = 10000, tol = 1e-5, omega = 
     u_new[0, :] = 1  # Top boundary
     u_new[-1, :] = 0  # Bottom boundary
     
-
+    errors = []
     # Iteratively update the solution
     for it in range(max_iter):
         # Update each interior point
@@ -108,12 +110,14 @@ def successive_over_relaxation(nx, ny, w, max_iter = 10000, tol = 1e-5, omega = 
                 u_new[i, j] = 0.25 * w * (u[i+1, j] + u_new[i-1, j] + u[i, jr] + u_new[i, jl]) + (1 -w) * u[i, j]
         u_new[0, :] = 1  # Top boundary
         u_new[-1, :] = 0  # Bottom boundary
+
+        errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
-        if np.linalg.norm(u_new - u) < tol:
+        if np.max(np.abs(u_new - u)) < tol:
             print(f'Converged after {it} iterations.')
             break
         
         # Update the solution for the next iteration
         u[:] = u_new[:]
     
-    return u
+    return u, errors
