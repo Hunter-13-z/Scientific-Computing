@@ -121,3 +121,37 @@ def successive_over_relaxation(nx, ny, w, max_iter = 10000, tol = 1e-5, omega = 
         u[:] = u_new[:]
     
     return u, errors
+
+def successive_over_relaxation_it(nx, ny, w, max_iter = 10000, tol = 1e-5, omega = 1.5):
+    '''Successive Over-Relaxation method for laplace equation'''
+    u = np.zeros((nx, ny))
+    u_new = np.zeros_like(u)
+    
+    # Set boundary conditions 
+    u[0, :] = 1  # Top boundary
+    u[-1, :] = 0  # Bottom boundary
+    u_new[0, :] = 1  # Top boundary
+    u_new[-1, :] = 0  # Bottom boundary
+    
+    errors = []
+    # Iteratively update the solution
+    for it in range(max_iter):
+        # Update each interior point
+        for i in range(1, ny - 1):
+            for j in range(nx):
+                jr = (j + 1) % (nx - 1)  # right boundary
+                jl = (j - 1) % (nx - 1)  # left boundary
+                u_new[i, j] = 0.25 * w * (u[i+1, j] + u_new[i-1, j] + u[i, jr] + u_new[i, jl]) + (1 -w) * u[i, j]
+        u_new[0, :] = 1  # Top boundary
+        u_new[-1, :] = 0  # Bottom boundary
+
+        errors.append(np.max(np.abs(u_new - u)))
+        # Check for convergence
+        if np.max(np.abs(u_new - u)) < tol:
+            return it
+            
+        
+        # Update the solution for the next iteration
+        u[:] = u_new[:]
+    
+    return max_iter
