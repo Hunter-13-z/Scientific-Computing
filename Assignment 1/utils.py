@@ -2,7 +2,7 @@ import numpy as np
 
 def analytical_solution(nx, ny):
     '''Analytical solution for laplace equation with given boundary conditions'''
-    y = np.linspace(1, 0, ny)
+    y = np.linspace(0, 1, ny)
     u = np.tile(y[:,None], (1,nx))  
     return u
 
@@ -25,10 +25,10 @@ def jacobi(nx, ny, max_iter = 10000, tol = 1e-5):
     u_new = np.zeros_like(u)
     
     # Set boundary conditions 
-    u[0, :] = 1  # Top boundary
-    u[-1, :] = 0  # Bottom boundary
-    u_new[0, :] = 1  # Top boundary
-    u_new[-1, :] = 0  # Bottom boundary
+    u[0, :] = 0  # Top boundary
+    u[-1, :] = 1  # Bottom boundary
+    u_new[0, :] = 0  # Top boundary
+    u_new[-1, :] = 1  # Bottom boundary
     
     errors = []
     # Iteratively update the solution
@@ -39,8 +39,8 @@ def jacobi(nx, ny, max_iter = 10000, tol = 1e-5):
                 jr = (j + 1) % (nx - 1)  # right boundary
                 jl = (j - 1) % (nx - 1)  # left boundary
                 u_new[i, j] = 0.25 * (u[i+1, j] + u[i-1, j] + u[i, jr] + u[i, jl])
-        u_new[0, :] = 1  # Top boundary
-        u_new[-1, :] = 0  # Bottom boundary
+        u_new[0, :] = 0  # Top boundary
+        u_new[-1, :] = 1  # Bottom boundary
 
         errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
@@ -61,10 +61,10 @@ def gauss_seidel(nx, ny, max_iter = 10000, tol = 1e-5):
     u_new = np.zeros_like(u)
     
     # Set boundary conditions 
-    u[0, :] = 1  # Top boundary
-    u[-1, :] = 0  # Bottom boundary
-    u_new[0, :] = 1  # Top boundary
-    u_new[-1, :] = 0  # Bottom boundary
+    u[0, :] = 0  # Top boundary
+    u[-1, :] = 1  # Bottom boundary
+    u_new[0, :] = 0  # Top boundary
+    u_new[-1, :] = 1  # Bottom boundary
     
     errors = []
     # Iteratively update the solution
@@ -75,8 +75,8 @@ def gauss_seidel(nx, ny, max_iter = 10000, tol = 1e-5):
                 jr = (j + 1) % (nx - 1)  # right boundary
                 jl = (j - 1) % (nx - 1)  # left boundary
                 u_new[i, j] = 0.25 * (u[i+1, j] + u_new[i-1, j] + u[i, jr] + u_new[i, jl])
-        u_new[0, :] = 1  # Top boundary
-        u_new[-1, :] = 0  # Bottom boundary
+        u_new[0, :] = 0  # Top boundary
+        u_new[-1, :] = 1  # Bottom boundary
         errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
         if np.max(np.abs(u_new - u)) < tol :
@@ -94,10 +94,10 @@ def successive_over_relaxation(nx, ny, w, max_iter = 10000, tol = 1e-5):
     u_new = np.zeros_like(u)
     
     # Set boundary conditions 
-    u[0, :] = 1  # Top boundary
-    u[-1, :] = 0  # Bottom boundary
-    u_new[0, :] = 1  # Top boundary
-    u_new[-1, :] = 0  # Bottom boundary
+    u[0, :] = 0  # Top boundary
+    u[-1, :] = 1  # Bottom boundary
+    u_new[0, :] = 0  # Top boundary
+    u_new[-1, :] = 1  # Bottom boundary
     
     errors = []
     # Iteratively update the solution
@@ -108,8 +108,8 @@ def successive_over_relaxation(nx, ny, w, max_iter = 10000, tol = 1e-5):
                 jr = (j + 1) % (nx - 1)  # right boundary
                 jl = (j - 1) % (nx - 1)  # left boundary
                 u_new[i, j] = 0.25 * w * (u[i+1, j] + u_new[i-1, j] + u[i, jr] + u_new[i, jl]) + (1 -w) * u[i, j]
-        u_new[0, :] = 1  # Top boundary
-        u_new[-1, :] = 0  # Bottom boundary
+        u_new[0, :] = 0  # Top boundary
+        u_new[-1, :] = 1  # Bottom boundary
 
         errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
@@ -128,10 +128,10 @@ def successive_over_relaxation_it(nx, ny, w, max_iter = 10000, tol = 1e-5):
     u_new = np.zeros_like(u)
     
     # Set boundary conditions 
-    u[0, :] = 1  # Top boundary
-    u[-1, :] = 0  # Bottom boundary
-    u_new[0, :] = 1  # Top boundary
-    u_new[-1, :] = 0  # Bottom boundary
+    u[0, :] = 0  # Top boundary
+    u[-1, :] = 1  # Bottom boundary
+    u_new[0, :] = 0  # Top boundary
+    u_new[-1, :] = 1  # Bottom boundary
     
     errors = []
     # Iteratively update the solution
@@ -142,8 +142,8 @@ def successive_over_relaxation_it(nx, ny, w, max_iter = 10000, tol = 1e-5):
                 jr = (j + 1) % (nx - 1)  # right boundary
                 jl = (j - 1) % (nx - 1)  # left boundary
                 u_new[i, j] = 0.25 * w * (u[i+1, j] + u_new[i-1, j] + u[i, jr] + u_new[i, jl]) + (1 -w) * u[i, j]
-        u_new[0, :] = 1  # Top boundary
-        u_new[-1, :] = 0  # Bottom boundary
+        u_new[0, :] = 0  # Top boundary
+        u_new[-1, :] = 1  # Bottom boundary
 
         errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
@@ -164,10 +164,10 @@ def successive_over_relaxation_sink(nx, ny, w, max_iter = 10000, tol = 1e-5,sink
     u_new = np.zeros_like(u)
     
     # Set boundary conditions 
-    u[0, :] = 1  # Top boundary
-    u[-1, :] = 0  # Bottom boundary
-    u_new[0, :] = 1  # Top boundary
-    u_new[-1, :] = 0  # Bottom boundary
+    u[0, :] = 0  # Top boundary
+    u[-1, :] = 1  # Bottom boundary
+    u_new[0, :] = 0  # Top boundary
+    u_new[-1, :] = 1  # Bottom boundary
     
     # Set sink conditions
     sink_exist = sinks is not None
@@ -194,8 +194,8 @@ def successive_over_relaxation_sink(nx, ny, w, max_iter = 10000, tol = 1e-5,sink
                     jr = (j + 1) % (nx - 1)  # right boundary
                     jl = (j - 1) % (nx - 1)  # left boundary
                     u_new[i, j] = 0.25 * w * (u[i+1, j] + u_new[i-1, j] + u[i, jr] + u_new[i, jl]) + (1 -w) * u[i, j]
-        u_new[0, :] = 1  # Top boundary
-        u_new[-1, :] = 0  # Bottom boundary
+        u_new[0, :] = 0  # Top boundary
+        u_new[-1, :] = 1  # Bottom boundary
 
         errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
@@ -215,10 +215,10 @@ def successive_over_relaxation_sink_it(nx, ny, w, max_iter = 10000, tol = 1e-5,s
     u_new = np.zeros_like(u)
     
     # Set boundary conditions 
-    u[0, :] = 1  # Top boundary
-    u[-1, :] = 0  # Bottom boundary
-    u_new[0, :] = 1  # Top boundary
-    u_new[-1, :] = 0  # Bottom boundary
+    u[0, :] = 0  # Top boundary
+    u[-1, :] = 1  # Bottom boundary
+    u_new[0, :] = 0  # Top boundary
+    u_new[-1, :] = 1  # Bottom boundary
     
     # Set sink conditions
     sink_exist = sinks is not None
@@ -245,8 +245,8 @@ def successive_over_relaxation_sink_it(nx, ny, w, max_iter = 10000, tol = 1e-5,s
                     jr = (j + 1) % (nx - 1)  # right boundary
                     jl = (j - 1) % (nx - 1)  # left boundary
                     u_new[i, j] = 0.25 * w * (u[i+1, j] + u_new[i-1, j] + u[i, jr] + u_new[i, jl]) + (1 -w) * u[i, j]
-        u_new[0, :] = 1  # Top boundary
-        u_new[-1, :] = 0  # Bottom boundary
+        u_new[0, :] = 0  # Top boundary
+        u_new[-1, :] = 1  # Bottom boundary
 
         errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
@@ -266,10 +266,10 @@ def successive_over_relaxation_insulating(nx, ny, w, max_iter = 10000, tol = 1e-
     u_new = np.zeros_like(u)
     
     # Set boundary conditions 
-    u[0, :] = 1  # Top boundary
-    u[-1, :] = 0  # Bottom boundary
-    u_new[0, :] = 1  # Top boundary
-    u_new[-1, :] = 0  # Bottom boundary
+    u[0, :] = 0  # Top boundary
+    u[-1, :] = 1  # Bottom boundary
+    u_new[0, :] = 0  # Top boundary
+    u_new[-1, :] = 1  # Bottom boundary
     
     # Set sink conditions
     sink_exist = sinks is not None
@@ -305,8 +305,8 @@ def successive_over_relaxation_insulating(nx, ny, w, max_iter = 10000, tol = 1e-
                 c = get_value(i,jr)
                 d = get_value(i,jl)
                 u_new[i, j] = 0.25 * w * (a + b + c + d) + (1 -w) * u[i, j]
-        u_new[0, :] = 1  # Top boundary
-        u_new[-1, :] = 0  # Bottom boundary
+        u_new[0, :] = 0  # Top boundary
+        u_new[-1, :] = 1  # Bottom boundary
 
         errors.append(np.max(np.abs(u_new - u)))
         # Check for convergence
