@@ -3,7 +3,7 @@
 This repository contains assignment for Scientific Computing
 
 ## Files
-
+```
 Scientific-Computing/
 ├── Assignment2/
 │   │
@@ -31,7 +31,7 @@ Scientific-Computing/
 │
 ├── .gitignore                          # Files ignored by Git (e.g., cache files, system files)
 ├── README.md                           # Project description and usage information
-
+```
 
 
 
