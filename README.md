@@ -25,11 +25,11 @@ Scientific-Computing/
 │   │   ├── cluster_ps_1.0.npy          # DLA cluster array for ps = 1
 │   │   ├── cluster_ps_1.0_steps_856.png    # Visualization of cluster for ps = 1
 │   │
+│   ├── 2.1_DLA.ipynb                   # Numerical solution for DLA growth (Task 2.1)
 │   ├── 2.2_monte_carlo_DLA.ipynb       # Monte Carlo simulation of Diffusion Limited Aggregation (Task 2.2)
-│   ├── 2.3_Gray_Scott_model.ipynb      # Implementation of the Gray–Scott reaction–diffusion model and pattern visualization (Task 2.3)
-│   ├── DLA.ipynb                       # Numerical solution of the Laplace equation for DLA growth (Task 2.1)
-│
-├── .gitignore                          # Files ignored by Git (e.g., cache files, system files)
+│   ├── 2.3_Gray_Scott_model.ipynb      # Gray–Scott reaction–diffusion model and pattern visualization (Task 2.3)
+│   ├── requirements.txt                # Dependencies list for Python installation
+├── .gitignore                          # Files ignored by Git
 ├── README.md                           # Project description and usage information
 ```
 
