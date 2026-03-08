@@ -3,7 +3,9 @@
 This repository contains assignment for Scientific Computing
 
 ## Files
--'DLA.ipynb' : First part of set 2
+-Assignment2
+  -'DLA.ipynb' : First part of set 2
+  
 
 
 ## Environment
