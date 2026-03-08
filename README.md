@@ -1,4 +1,4 @@
-# Assignment Title
+# Scientific Computing
 
 This repository contains assignment for Scientific Computing
 
