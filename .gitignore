@@ -2,3 +2,6 @@
 __pycache__/
 dla*.png
 .ipynb_checkpoints/
+*.png
+Karman_FE.ipynb
+Karman_LB.ipynb

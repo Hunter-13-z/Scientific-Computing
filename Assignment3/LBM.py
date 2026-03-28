@@ -72,8 +72,8 @@ cy_cyl = Ny//2    # cylinder center y  (centered vertically)
 r_cyl  =  20         # cylinder radius
 
 # Flow parameters
-U_inlet = 0.15      # inlet velocity
-Re  = 300       # target Reynolds number
+U_inlet = 0.1     # inlet velocity
+Re  = 200       # target Reynolds number
 
 # Derived quantities:
 #   Re = U * D / nu   →  nu = U * D / Re
