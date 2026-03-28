@@ -29,6 +29,11 @@ Scientific-Computing/
 │   ├── 2.2_monte_carlo_DLA.ipynb       # Monte Carlo simulation of Diffusion Limited Aggregation (Task 2.2)
 │   ├── 2.3_Gray_Scott_model.ipynb      # Gray–Scott reaction–diffusion model and pattern visualization (Task 2.3)
 │   ├── requirements.txt                # Dependencies list for Python installation
+├── Assignment3/
+│   │
+│   ├── Karman_FD.ipynb                 # Finite difference Kármán vortex street solver
+│   ├── FE.ipynb                        # Finite element(using ngsolve) Kármán vortex street solver
+│   ├── LBM.py                          # Lattice Boltzmann Kármán vortex street solver
 ├── .gitignore                          # Files ignored by Git
 ├── README.md                           # Project description and usage information
 ```
@@ -45,3 +50,4 @@ Required libraries may include:
 - numpy
 - numba
 - matplotlib
+- ngsolve
