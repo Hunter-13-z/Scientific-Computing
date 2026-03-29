@@ -34,6 +34,8 @@ Scientific-Computing/
 │   ├── Karman_FD.ipynb                 # Finite difference Kármán vortex street solver
 │   ├── FE.ipynb                        # Finite element(using ngsolve) Kármán vortex street solver
 │   ├── LBM.py                          # Lattice Boltzmann Kármán vortex street solver
+│   ├── ChallengeB.ipynb                # WiFi router placement optimization
+│   ├── requirements.txt                # Dependencies list for Python installation
 ├── .gitignore                          # Files ignored by Git
 ├── README.md                           # Project description and usage information
 ```
